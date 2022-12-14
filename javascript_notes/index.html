@@ -5,90 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        *
-        {
-            margin: 0;
-            padding: 0;
-        }
-        .menu
-        {
-            position: fixed;
-            width: 200px;
-            height: 35px;
-            text-align: center;
-            font-size: 150%;
-            top: 10%;
-            left: -160px;
-            transition-duration: 1s;
-        }
-        .menu-main
-        {
-            float: left;
-            height: 35px;
-            width: 80%;
-            outline: 1px solid black;
-            vertical-align: middle;
-        }
-        .menu-popup
-        {
-            float: left;
-            height: 35px;
-            width: 20%;
-            outline: 1px solid black;
-            vertical-align: middle;
-        }
-        .container
-        {
-            width: 80%;
-            height: 100%;
-            margin-left: auto;
-            margin-right: auto;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .note
-        {
-            font-size: 100%;
-            max-width: 20%;
-            min-height: 100px;  
-            margin: 20px;
-            text-align: center;
-            -webkit-box-shadow: 8px 18px 12px 6px rgba(66, 68, 90, 1);
-            -moz-box-shadow: 8px 18px 12px 6px rgba(66, 68, 90, 1);
-            box-shadow: 8px 18px 12px 6px rgba(66, 68, 90, 1);
-        }
-        .title
-        {
-            font-size: 150%;
-            font-weight: bold;
-            width: 100%;
-        }
-        .note-content
-        {
-            margin-top: 20px;
-            width: 100%;
-        }
-        @media (max-width: 599px) {
-            .note
-            {
-                overflow-y: scroll;
-                min-height: 100px;
-                max-height: 300px;
-                max-width: 40%;
-            }
-            .title
-            {
-                font-size: 100%;
-            }
-            .note-content
-            {
-                font-size: 75%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
         <div class="menu">
@@ -111,37 +28,5 @@
         </div>
 </body>
 </html>
-<script>
-const btn1 = document.querySelector("#btn1");
-const popup = document.querySelector(".menu-popup");
-const container = document.querySelector(".container");
-let reached = false;
-popup.addEventListener("click", ()=>{
-    if(!reached)
-    {
-        document.querySelector(".menu").style.left = "0px"; 
-        reached = true;
-    }
-    else
-    {
-        document.querySelector(".menu").style.left = "-160px"; 
-        reached = false;
-    }
-})
-btn1.addEventListener("click", ()=>{
-    let title_content = prompt("Add a note header")
-    let note_content = prompt("Add a note") 
-    let div = document.createElement("div")
-    let n_title = document.createElement("n_title")
-    let content = document.createElement("content")
-    div.classList.add("note")
-    n_title.classList.add("title")
-    content.classList.add("note-content")
-    n_title.innerHTML = title_content + "<br>";
-    content.innerHTML = note_content;
-    container.appendChild(div)
-    div.appendChild(n_title)
-    div.appendChild(content)
-    console.log(div.children)
-})
+<script src="script.js">
 </script>
