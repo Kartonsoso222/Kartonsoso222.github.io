@@ -16,14 +16,23 @@ const charged = document.querySelector(".charged")
 //sprawia że visual podpowiada nam nazwę zmiennej dzięki czemu możemy pisać efektywniej
 let d1top = 0;
 let d1left = 0;
+
+//Zmienna speed mówi o ile pixeli przesuwa się nasza postać, domyślna wartość to 10
+//Przy przyspieszeniu wartość zmienia się do 50
 let speed = 10;
+
+
 let chargebar = 100;
 let active = false;
 let toggled = false;
 let toggled2 = false;
+//Ruch w przód - zmienna d1top oznacza margines górny - ruch postaci w tej grze opiera się nie zamieniu wartości marginesów
+//Funkcja zminiejsza wartość d1top o obecną szybkość, i ustawia margines górny diva na wartość tej zmiennej przesuwając go w górę
 function mforward()
 {
+//Zmienia wartość zmiennej 
     d1top -= speed;
+//Zmienia wielkość marginesu 
     div1.style.marginTop = d1top + 'px'
 }
 function mleft()
