@@ -13,7 +13,7 @@ const main = document.querySelector(".main")
 const div1 = document.querySelector(".div1")
 const charged = document.querySelector(".charged")
 //Definiowanie zmiennych na początku kodu poprawia jego czytelność, oraz
-/sprawia że visual podpowiada nam nazwę zmiennej dzięki czemu możemy pisać efektywniej
+//sprawia że visual podpowiada nam nazwę zmiennej dzięki czemu możemy pisać efektywniej
 let d1top = 0;
 let d1left = 0;
 let speed = 10;
