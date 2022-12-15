@@ -1,6 +1,19 @@
+//Definiowanie elemetnów HTML jako stałe const js'a pozwala odnieść się do nich w 
+// wygodniejszy sposób - nie muszę pisać "document.querySelector(".main")" za każdym razem
+//tylko nazwastałej.reszta kodu
+
+//querySelector jest w uproszczeniu tym samym co getEelmentbyId lub getElementsByClassName
+//Ale możemy się odnieść nim do klasy lub ID elementu na raz jedną komendą 
+//To czy odnosimy się do klasy czy do ID zaznaczamy przez dodanie:
+// W przypadku klasy .
+// W przypadku ID # 
+//Przed nazwą diva do którego się odnosimy 
+
 const main = document.querySelector(".main")
 const div1 = document.querySelector(".div1")
 const charged = document.querySelector(".charged")
+//Definiowanie zmiennych na początku kodu poprawia jego czytelność, oraz
+/sprawia że visual podpowiada nam nazwę zmiennej dzięki czemu możemy pisać efektywniej
 let d1top = 0;
 let d1left = 0;
 let speed = 10;
