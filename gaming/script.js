@@ -62,7 +62,7 @@ addEventListener("keydown", (e)=>{
     // e.key === ' ' puste miejsce oznacza spację - warunek sprawdza czy wciśnięty przycisk to spacja
     else if (e.key === ' ')
     {
-        tempo()
+       // skin 
     }
     distance()
 })
@@ -71,8 +71,9 @@ addEventListener("keydown", (a)=>{
     {
     if (!toggled3)
     {
-        //toggled3 = true;
+        toggled3 = true;
         starting()
+        tempo()
     }
 }
 })
