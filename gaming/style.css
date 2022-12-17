@@ -3,28 +3,33 @@
     margin: 0;
     padding: 0;
 }
+body
+{
+    background-color: black;
+    color: white;
+}
 .div1
 {
     width: 100px;
     height: 100px;
-    background-color: red;
+    background-image: url(papis.png);
+    background-size: contain;
     position: absolute;
-    outline: 1px solid black;
 }
 
 .div2
 {
     width: 50px;
     height: 50px;
-    background-color: blue;
-    outline: 1px solid black;
+    background-image: url(gift1.png);
+    background-size: contain;
     display: none;
     z-index: 2;
 }
 
 .main
 {
-    outline: 1px solid black;
+    outline: 1px solid white;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
@@ -40,16 +45,17 @@
 {
     width: 600px;
     height: 50px;
-    outline: 1px solid black;
+    outline: 1px solid white;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 450px;
     position: fixed;
+    clear: both;
 }
 .charged
 {
-    background-color: lightgreen;
+    background-color: yellowgreen;
     height: 100%;
     width: 100%;
     max-width: 100%;
@@ -59,8 +65,8 @@
 .info
 {
     width: 600px;
-    height: 100px;
-    outline: 1px solid black;
+    min-height: 100px;
+    outline: 1px solid white;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
@@ -74,7 +80,43 @@
     position: fixed;
     top: 0;
     left: 0;
-    outline: 1px solid black;
+    outline: 1px solid white;
     width: 10%;
     height: 20%;
+}
+.result
+{
+    width: 80%;
+    height: 200px;
+    display: none;
+    font-size: 200%;
+    text-align: center;
+    float: left;
+}
+.tree
+{
+    width: 10%;
+    height: 200px;
+    background-image: url(tree.png);
+    background-size: 100% 100%;
+    float: left;
+    display: none;
+}
+.tree2
+{
+    width: 10%;
+    height: 200px;
+    background-image: url(tree.png);
+    background-size: 100% 100%;
+    float: left;
+    display: none;
+}
+.tree3
+{
+    width: 10%;
+    height: 200px;
+    background-image: url(tree.png);
+    background-size: 100% 100%;
+    margin-top: 10%;
+    float: left;
 }
