@@ -14,11 +14,15 @@ const div1 = document.querySelector(".div1")
 const charged = document.querySelector(".charged")
 const info = document.querySelector(".info")
 const div2 = document.querySelector(".div2")
+const scoreb = document.querySelector(".score")
 //Definiowanie zmiennych na początku kodu poprawia jego czytelność, oraz
 //sprawia że visual podpowiada nam nazwę zmiennej dzięki czemu możemy pisać efektywniej
-let d1top = 0;
-let d1left = 0;
-
+let d1top = 0
+let d1left = 0
+let positionY
+let positionX
+let score = 0
+let speed_regain = 10
 //Zmienna speed mówi o ile pixeli przesuwa się nasza postać, domyślna wartość to 10
 //Przy przyspieszeniu wartość zmienia się do 50
 let speed = 10;
@@ -60,6 +64,7 @@ addEventListener("keydown", (e)=>{
     {
         tempo()
     }
+    distance()
 })
 addEventListener("keydown", (a)=>{
     if (a.key === 'Enter')
@@ -162,7 +167,7 @@ function discharge()
 }
 function discharge1()
 {
-    chargebar -= 20;
+    chargebar -= 17;
     if (chargebar <0)
     {
         chargebar =0
@@ -194,6 +199,7 @@ function tempo2()
 function tempo3()
 {
     setTimeout('tempo2()', 10)
+
 }
 
 
@@ -207,8 +213,8 @@ function starting()
 
 function starting2()
 {
-    let positionY = (Math.random())*1000
-    let positionX = (Math.random())*1000    
+     positionY = (Math.random())*1000
+     positionX = (Math.random())*1000    
         while (positionY > 300)
         {
             positionY -=300;
@@ -229,8 +235,83 @@ function starting2()
         {
             positionX =- 50;
         }  
-    
+        if (positionX < 0)
+        {
+            positionX += 50;
+        }
     div2.style.display = "block";
     div2.style.marginTop = positionY + "px";
     div2.style.marginLeft = positionX + "px";
+    if (distance < 150)
+    {
+        starting()
+    }
 }
+
+
+function distance()
+{
+
+    let div1X = d1left;
+    let div1Y = d1top;
+    let div2X = positionX;
+    let div2Y = positionY;
+    let distance
+    if(div1Y > div2Y && div1X < div2X)
+    {
+        let edge1 = div1Y - div2Y
+        let edge2 = div2X - div1X
+        let sum =  Math.pow(edge1, 2) + Math.pow(edge2, 2)
+        distance = Math.sqrt(sum)
+        console.log(distance)
+    }
+    else if (div1Y > div2Y && div1X > div2X)
+    {
+        let edge1 = div1X - div2X
+        let edge2 = div1Y - div2Y
+        let sum =  Math.pow(edge1, 2) + Math.pow(edge2, 2)
+         distance = Math.sqrt(sum)
+        console.log(distance)
+    }
+    else if (div2Y > div1Y && div2X > div1X)
+    {
+        let edge1 = div2X - div1X
+        let edge2 = div2Y - div1Y
+        let sum =  Math.pow(edge1, 2) + Math.pow(edge2, 2)
+         distance = Math.sqrt(sum)
+        console.log(distance)
+    }
+    else if (div2Y > div1Y && div1X > div2X)
+    {
+        let edge1 = div1X - div2X
+        let edge2 = div2Y - div1Y
+        let sum =  Math.pow(edge1, 2) + Math.pow(edge2, 2)
+         distance = Math.sqrt(sum)
+        console.log(distance)
+    }
+    if (distance < 110)
+    {
+        starting()
+        score ++;
+        console.log(score)
+        if (chargebar < 25)
+        {
+            speed_regain = 25
+        }
+        else 
+        {
+            speed_regain = 10
+        }
+        if (chargebar > 10)
+        {
+        chargebar+= speed_regain;
+        }
+        else 
+        {
+            chargebar = speed_regain;
+        }
+        charged.style.width = chargebar + "%";
+        scoreb.innerHTML = "Punkty: " + score;
+    }
+}
+

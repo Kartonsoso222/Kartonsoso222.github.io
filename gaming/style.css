@@ -52,6 +52,7 @@
     background-color: lightgreen;
     height: 100%;
     width: 100%;
+    max-width: 100%;
     transition-duration: 0.5s;
 }
 
@@ -67,4 +68,13 @@
     position: fixed;
     text-align: center;
     font-size: 150%;
+}
+.score
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: 1px solid black;
+    width: 10%;
+    height: 20%;
 }
