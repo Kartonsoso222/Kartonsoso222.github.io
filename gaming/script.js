@@ -468,7 +468,7 @@ function distance()
             }
         }
         // Dodaje odpowiednią ilość energii do paska energii
-        chargebar+= speed_regain
+        chargebar += speed_regain
         // Zmienia szerokość naładowanej części paska energii zgodnie z jej ilością
         charged.style.width = chargebar + "%"
         // Zapisuje ilość punktów
