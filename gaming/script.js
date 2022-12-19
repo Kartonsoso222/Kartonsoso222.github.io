@@ -152,9 +152,10 @@ function starting2()
         // Ustawia margines górny i lewy prezentu na wcześniej ustaloną i zmodyfikowaną losową liczbę
     div2.style.marginTop = positionY + "px"
     div2.style.marginLeft = positionX + "px"
-    // Jeśli zmienna distance (liczona niżej) jest mniejsza niż 150 wywołuje się na nowo zmieniając pozycje prezentu aby
+    // Jeśli zmienna distance (liczona niżej) jest mniejsza niż 400 wywołuje się na nowo zmieniając pozycje prezentu aby
     // Nie pojawił się on za blisko gracza
-    if (distance < 110)
+    // ( To chyba nie działa z nieznanych mi powodów)
+    if (distance < 400)
     {
         starting()
     }
@@ -269,15 +270,15 @@ function discharge1()
     // Zmienia wartość zmiennej discarge_amount przy wyższej liczbie punktów - energia spada szybciej utrudniając grę
     if (score > 50)
     {
-        discharge_amount = 22
+        discharge_amount = 24
     }
     else if ( score > 75 )
     {
-        discharge_amount = 25
+        discharge_amount = 27
     }
     else if ( score > 100)
     {
-        discharge_amount = 30
+        discharge_amount = 32
     }
     // W przypadku gdy liczba punktów nie jest jeszcze wysoka, ustawia stratę energii na bazową ilość
     else {
@@ -423,7 +424,7 @@ function distance()
         let sum =  Math.pow(edge1, 2) + Math.pow(edge2, 2)
          distance = Math.sqrt(sum)
     }
-    if (distance < 110)
+    if (distance < 100)
     {
         // Jeśli wyliczony dystans jest mniejszy niż 110 wywouje funkcje zmieniającą miejsce i wygląd prezentu na nowo
         starting()
@@ -439,7 +440,7 @@ function distance()
             }
             else if (score > 75)
             {
-                speed_regain = 15
+                speed_regain = 13
             }
             else 
             {
@@ -459,7 +460,7 @@ function distance()
             }
             else if (score > 100)
             {
-                speed_regain = 4
+                speed_regain = 3
             }
             else 
             {
