@@ -43,8 +43,8 @@ btn3.addEventListener("click", () =>{
     let player_answer = prompt("Guess the number from 1 to 100 " + "Select your first of three answers");
     let player_answer2 = prompt("Guess the number from 1 to 100 " + "Select your second of three answers");
     let player_answer3 = prompt("Guess the number from 1 to 100 "  + "Select your third of three answers");
-    let player_answer4 = prompt("Guess the number from 1 to 100 "  + "Select your third of three answers");
-    let player_answer5 = prompt("Guess the number from 1 to 100 "  + "Select your third of three answers");
+    let player_answer4 = prompt("Guess the number from 1 to 100 "  + "Select your forth of three answers");
+    let player_answer5 = prompt("Guess the number from 1 to 100 "  + "Select your fifth of three answers");
     answers_hard = []
     answers_hard.push(player_answer, player_answer2, player_answer3, player_answer4, player_answer5)
     document.querySelector(".main-2").style.display = "flex";
