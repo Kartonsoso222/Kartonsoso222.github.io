@@ -101,7 +101,7 @@ p::first-letter
 {
     font-size: 175%;
 }
-:is(.menu, .info, h1)
+/*:is(.menu, .info, h1)
 {
     display: none;
-} 
+} */
