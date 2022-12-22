@@ -6,6 +6,8 @@
 body
 {
     overflow-x: hidden;
+    background-color: rgb(20, 20, 20);
+    color: white;
 }
 h1
 {
@@ -13,6 +15,7 @@ h1
     font-size: 250%;
     font-weight: bold; 
     text-decoration: underline yellowgreen;
+    clear: both;
 }
 h2
 {
@@ -34,22 +37,49 @@ h2
 }
 .menu-tile
 {
-    width: 33%;
-    float: left;
-    height: 100%;
+    position: relative;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.5rem 1rem;
     font-size: 300%;
+    color: white;
+    cursor: pointer;
+    overflow: hidden;
+    width: 31%;
+    transition-duration: 0.5s;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition-duration: 0.5s;
 }
-.menu-tile:hover
+.menu-tile:nth-child(3)
 {
-    background-color: red;
+    width: 38%;
+}
+
+.menu-tile::before
+{
+    --size: 0;
+    content: '';
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--size);
+    height: var(--size);
+    background: radial-gradient(ellipse closest-side, rgba(255, 255, 255, 0.15), transparent);
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease;
+}
+.menu-tile:hover::before 
+{
+    --size: 200px;
+}
+.menu-tile:nth-child(3)
+{
+    width: 38%;
 }
 .menu-tile:nth-child(1):hover:nth-child(1)
 {
     width: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 .menu-tile:nth-child(1):hover:nth-child(2), :nth-child(3)
 {
@@ -59,6 +89,7 @@ h2
 .menu-tile:nth-child(2):hover:nth-child(2)
 {
     width: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 .menu-tile:nth-child(2):hover:nth-child(1), :nth-child(3)
 {
@@ -68,12 +99,14 @@ h2
 .menu-tile:nth-child(3):hover:nth-child(3)
 {
     width: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .info
 {
     width: 100%;
     height: 400px;
+    margin-left: 1000px;
     transition-duration: 1s;
 }
 .pfp
@@ -89,8 +122,38 @@ h2
     background-image: url(ikona.ico);
     background-size: cover;
     border-radius: 50%;
+    transition-duration: 1s;
 }
 .description
+{
+    width: 70%;
+    height: 100%;
+    float: left;
+    font-size: 150%;
+}
+.info2
+{
+    width: 100%;
+    height: 400px;
+    transition-duration: 1s;
+    margin-left: -1000px;
+}
+.pfp2
+{
+    width: 30%;
+    height: 100%;
+    float: left;
+}
+.pht2
+{
+    width: 100%;
+    height: 100%;
+    background-image: url(js.png);
+    background-size: cover;
+    border-radius: 50%;
+    transition-duration: 1s;
+}
+.description2
 {
     width: 70%;
     height: 100%;
@@ -102,3 +165,10 @@ p::first-letter
     font-size: 175%;
 }
 
+.name
+{
+    font-family: 'Caveat', cursive;
+    text-align: center;
+    font-size: 600%;
+    margin-top: 5%;
+}
