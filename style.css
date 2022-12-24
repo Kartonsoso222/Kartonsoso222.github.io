@@ -1,7 +1,50 @@
+:root
+{
+    --purple: rgb(123,31,162);
+    --violet: rgb(103,58,183);
+    --pink: rgb(244,143,177);
+}
 *
 {
     margin: 0;
     padding: 0;
+}
+@keyframes background-pan
+{
+    from {
+        background-position: 0% center;
+    }
+    to{
+        background-position: -200% center;
+    
+    }
+}
+@keyframes colorc
+{
+    0%
+    {
+        opacity: 0;
+    }
+    50%
+    {
+        opacity: 1;
+    }
+
+    100%
+    {
+        opacity: 0;
+    }
+}
+@keyframes backgroundmove
+{
+    0%
+    {
+        background-position: -1% center;
+    }
+    100%
+    {
+        background-position: -200% center;
+    } 
 }
 body
 {
@@ -27,6 +70,22 @@ h2
 {
     width: 100%;
     height: 100%;
+    position: relative;
+}
+.container::before
+{
+    background-image: radial-gradient(
+        rgba(255,255,255, 0.1) 3px,
+        transparent 10px
+    );
+    opacity: 1;
+    background-size: 100px 100px;
+    animation: colorc 5s linear infinite, backgroundmove 25s infinite;;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: ',';
+    color: rgba(255, 255, 255, 0);
 }
 .menu
 {
@@ -64,13 +123,13 @@ h2
     top: var(--y);
     width: var(--size);
     height: var(--size);
-    background: radial-gradient(ellipse closest-side, rgba(255, 255, 255, 0.15), transparent);
+    background: radial-gradient(ellipse closest-side, rgba(255, 255, 255, 0.2),  transparent);
     transform: translate(-50%, -50%);
-    transition: width 0.2s ease, height 0.2s ease;
+    transition: width 0.01s ease, height 0.01s ease;
 }
 .menu-tile:hover::before 
 {
-    --size: 200px;
+    --size: 275px;
 }
 .menu-tile:nth-child(3)
 {
@@ -121,7 +180,6 @@ h2
     height: 100%;
     background-image: url(ikona.ico);
     background-size: cover;
-    border-radius: 50%;
     transition-duration: 1s;
 }
 .description
@@ -150,7 +208,6 @@ h2
     height: 100%;
     background-image: url(js.png);
     background-size: cover;
-    border-radius: 50%;
     transition-duration: 1s;
 }
 .description2
@@ -167,8 +224,31 @@ p::first-letter
 
 .name
 {
+    animation: background-pan 3s linear infinite;
+
     font-family: 'Caveat', cursive;
+    max-width: 30%;
     text-align: center;
+    background: linear-gradient(
+        to right,
+        var(--purple),
+        var(--violet),
+        var(--pink),
+        var(--purple) 
+        );
     font-size: 600%;
+    margin-left: auto;
+    margin-right: auto;
+    background-size: 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
     margin-top: 5%;
+    opacity: 1;
+}
+.filler
+{
+    width: 100%;
+    height: 5%;
 }
