@@ -9,20 +9,20 @@ function menu_hide()
     if (scrollY > 25)
     {
         menu1()
-        show_info1()
     }
     else if (scrollY <= 25)
     {
         menu2()
-        hide_info1()
     }
     if (scrollY > 100)
     {
-        setTimeout('show_info2()', 200)
+        show_info1()
+        setTimeout('show_info2()', 400)
     }
     else if (scrollY < 100)
     {
-        hide_info2()
+        hide_info1()
+        setTimeout('hide_info2()', 400)
     }
 }
 function menu1()
@@ -54,12 +54,12 @@ function show_info1()
 }
 function hide_info2()
 {
-    info2.style.marginLeft = -(info2.clientWidth*2) + 'px'
-    pht.style.webkitTransform = 'rotate(0deg)'; 
-    pht.style.mozTransform    = 'rotate(0deg)'; 
-    pht.style.msTransform     = 'rotate(0deg)'; 
-    pht.style.oTransform      = 'rotate(0deg)'; 
-    pht.style.transform       = 'rotate(0deg)'; 
+     info2.style.marginLeft = -(info2.clientWidth*2) + 'px'
+    pht2.style.webkitTransform = 'rotate(0deg)'; 
+    pht2.style.mozTransform    = 'rotate(0deg)'; 
+    pht2.style.msTransform     = 'rotate(0deg)'; 
+    pht2.style.oTransform      = 'rotate(0deg)'; 
+    pht2.style.transform       = 'rotate(0deg)'; 
 }
 function show_info2()
 {
