@@ -19,7 +19,7 @@
     
     }
 }
-/* @keyframes colorc
+ @keyframes colorc
 {
     0%
     {
@@ -45,7 +45,7 @@
     {
         background-position: -200% center;
     } 
-} */
+} 
 body
 {
     overflow-x: hidden;
@@ -78,7 +78,7 @@ h2
     height: 100%;
     position: relative;
 }
-/* .container::before
+ .container::before
 {
     background-image: radial-gradient(
         rgba(255,255,255, 0.1) 3px,
@@ -92,7 +92,7 @@ h2
     height: 100%;
     content: ',';
     color: rgba(255, 255, 255, 0);
-} */
+} 
 .menu
 {
     width: 100%;
