@@ -80,6 +80,7 @@ function clearmap()
         spawnapple()
         score++
     }
+    console.log(score)
 }
 
 function spawnapple()
