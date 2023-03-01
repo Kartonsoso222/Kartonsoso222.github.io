@@ -1,0 +1,19 @@
+.container
+{
+    width: 60%;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    outline: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#div
+{
+    width: 20%;
+    height: 120px;
+    outline: 1px solid black;
+}
