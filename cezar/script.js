@@ -2,7 +2,7 @@ let przed_szyfrem = prompt("Podaj hasło")
 let przesuniecie = Number(prompt("Podaj przesunięcie"))
 let wpisano = false
 let nie_rozpoznano = false
-let alfabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","R","S","T","U","W","X","Y","Z"]
+let alfabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","W","X","Y","Z"]
 
 
 for (i=0; i<przed_szyfrem.length; i++)
