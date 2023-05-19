@@ -1,0 +1,219 @@
+*
+{
+    padding: 0;
+    margin: 0;
+    z-index: 1;
+}
+html
+{
+  overflow: hidden;
+  font-family: 'Quicksand', sans-serif;
+}
+.container
+{
+    width: 100%;
+    height: 100%;
+}
+header
+{
+    width: 100%;
+    height: 20vh;
+    background-color: black;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    overflow: visible;
+}   
+.logo
+{
+    width: 15%;
+    float: left;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+}
+.logo-content
+{
+     width: 100%;
+     height: 150%;
+    background-color: black;
+     border-radius: 50%;
+     background-image: url(logo.svg);
+     background-size: 50% 50%;
+     background-repeat: no-repeat;
+     background-position: center;
+     z-index: 2;
+}
+.menu
+{
+    width: 85%;
+    float: left;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.option
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 100%;
+    font-size: 200%;
+    transition-duration: 0.5s;
+}
+.option:hover
+{
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.option a
+{
+  text-decoration: none;
+  color: white;
+}
+.slider-container
+{
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  overflow: visible;
+}
+.slider-box
+{
+  width: 40%;
+  height: 100%;
+  z-index: 1;
+  background-image: url(table.jpg);
+  position: relative;
+}
+/* .slider-box::after
+{
+  position: absolute;
+  top: 0;
+  margin-left: 10%;   
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  content: "chuj";
+} */
+.slider-main
+{
+  width: 60%;
+  height: 100%;
+  background-image: url(tlo3.jpg);
+  transition-duration: 1s;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  z-index: 2;
+  position: relative;
+  /* transform: skew(-8deg); */
+}
+.img-container
+{
+  width: 100%;
+  height: 100%;
+  transition-duration: 0.8s;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+}
+.img-container2
+{
+  width: 100%;
+  height: 100%;
+  transition-duration: 0.8s;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  position: absolute;
+  margin-left: 100%;
+}
+#product
+{
+  width: 100%;
+  height: 100%;
+}
+#product2 
+{
+  width: 100%;
+  height: 100%;
+}
+.name_wrap
+{
+  width: 60%;
+  height: 90%;
+  color: white;
+}
+.nav_and_name
+{
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.slider_product_name
+{
+  width: 100%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 200%;
+}
+.slider_product_price
+{
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  color: gray;
+  font-size: 200%;
+}
+.content
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.balls
+{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(10, 10, 10, 0.5);
+}
+.circle
+{
+  width: 7%;
+  aspect-ratio: 1;
+  max-height: 100%;
+  margin-top: ca;
+  background-color: gray;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+
+:is(.arr1, .arr2)
+{
+  width: 20%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 400%;
+  transition-duration: 0.4s;
+  z-index: 2;
+}
+
+:is(.arr1, .arr2):hover
+{
+  background-color: rgba(100, 100, 100, 0.3);
+}
