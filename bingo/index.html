@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            width: 40vw;
+            aspect-ratio: 1;
+            outline: 4px solid black;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .element {
+            width: 20%;
+            height: 20%;
+            outline: 1px solid black;
+            font-size: 125%;
+            text-align: center;
+            outline-offset: -1px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .fancy-button {
+            display: inline-block;
+            width: 200px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 25px;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .fancy-button:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        }
+        .fancy-button:active {
+            transform: scale(0.95);
+        }
+        .buttonCont {
+            margin-top: 5vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div class="buttonCont">
+        <div class="fancy-button" onclick="ref()">
+            Odśwież
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', bingo);
+
+        function bingo() {
+            let hasla = [
+                'Mody do Minecrafta Mikołaja', 'Zagłodzona rybka Amelii', 'Firma Jacka', 'Naziści', 'Komuniści',
+                'PiS', 'KO/PO', 'Rząd', 'UE/Ekologia (Zielony ład)', 'Ceny (czegokolwiek)', 'Putin', 'Trump', 'Kaczyński', 'Trzaskowski', 'Tusk',
+                'Nowacka', 'Femboye', 'Palenie Fajek', 'Zioło', 'Lewica', 'Woke', 'Dziewczyna Saszy', 'Samobójstwo', 'Suck the bastard out (aborcja)',
+                'Brutalna metoda morderstwa', 'Narkotyki', 'Gry', 'Górnicza', 'II lub III Liceum'
+            ];
+
+            let losy = new Set();
+            let container = document.querySelector("#container");
+            container.innerHTML = "";
+
+            for (let i = 0; i < 25; i++) {
+                let los;
+                do {
+                    los = Math.floor(Math.random() * hasla.length);
+                } while (losy.has(los));
+
+                losy.add(los);
+
+                let div = document.createElement("div");
+                div.classList.add("element");
+                div.dataset.row = Math.floor(i / 5);
+                div.dataset.col = i % 5;
+                div.dataset.clicked = "false";
+                div.onclick = () => zaznacz(div);
+
+                if (i === 12) {
+                    div.innerHTML = "<b>Free pole</b>";
+                    div.dataset.clicked = "true"; 
+                    div.style.backgroundColor = "lightgreen";
+                } else {
+                    div.innerHTML = `<p>${hasla[los]}</p>`;
+                }
+
+                container.appendChild(div);
+            }
+        }
+
+        function zaznacz(div) {
+            let clicked = div.dataset.clicked === "true";
+            div.dataset.clicked = clicked ? "false" : "true";
+            div.style.backgroundColor = clicked ? "white" : "lightgreen";
+
+            checkBingo();
+        }
+
+        function checkBingo() {
+            for (let i = 0; i < 5; i++) {
+                let rowClicked = [...document.querySelectorAll(`[data-row="${i}"]`)].every(cell => cell.dataset.clicked === "true");
+                let colClicked = [...document.querySelectorAll(`[data-col="${i}"]`)].every(cell => cell.dataset.clicked === "true");
+
+                if (rowClicked || colClicked) {
+                    alert("BINGO!");
+                    return;
+                }
+            }
+
+            // Sprawdzanie przekątnych
+            let diagonal1 = [...document.querySelectorAll(".element")]
+                .filter(cell => cell.dataset.row === cell.dataset.col)
+                .every(cell => cell.dataset.clicked === "true");
+
+            let diagonal2 = [...document.querySelectorAll(".element")]
+                .filter(cell => parseInt(cell.dataset.row) + parseInt(cell.dataset.col) === 4)
+                .every(cell => cell.dataset.clicked === "true");
+
+            if (diagonal1 || diagonal2) {
+                alert("BINGO!");
+                return;
+            }
+        }
+
+        function ref() {
+            bingo();
+        }
+    </script>
+</body>
+</html>
