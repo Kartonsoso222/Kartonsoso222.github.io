@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         #container {
             width: 40vw;
@@ -24,6 +27,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-family: "Roboto", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 100;
+            font-style: normal;
+            font-variation-settings: "wdth" 100;
         }
         .fancy-button {
             display: inline-block;
@@ -56,6 +64,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+        @media (max-width: 599px)
+        {
+            #container
+            {
+                width: 90vw;
+            }
+            .element
+            {
+                font-size: 0.83rem;
+                font-family: "Roboto", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 300;
+                font-style: normal;
+                font-variation-settings: "wdth" 100;
+            }
         }
     </style>
 </head>
