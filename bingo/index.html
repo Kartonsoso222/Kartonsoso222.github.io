@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Victor Bingo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
     <style>
         #container {
             width: 40vw;
@@ -20,18 +20,17 @@
             width: 20%;
             height: 20%;
             outline: 1px solid black;
-            font-size: 125%;
             text-align: center;
-            outline-offset: -1px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: "Roboto", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 100;
-            font-style: normal;
-            font-variation-settings: "wdth" 100;
+            font-weight: 300;
+            padding: 5px;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            text-align: center;
         }
         .fancy-button {
             display: inline-block;
@@ -49,15 +48,10 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
         .fancy-button:hover {
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
             background: linear-gradient(135deg, #ff758c, #ff7eb3);
-        }
-        .fancy-button:active {
-            transform: scale(0.95);
         }
         .buttonCont {
             margin-top: 5vh;
@@ -65,30 +59,16 @@
             justify-content: center;
             align-items: center;
         }
-        @media (max-width: 599px)
-        {
-            #container
-            {
-                width: 90vw;
-            }
-            .element
-            {
-                font-size: 0.83rem;
-                font-family: "Roboto", sans-serif;
-                font-optical-sizing: auto;
-                font-weight: 300;
-                font-style: normal;
-                font-variation-settings: "wdth" 100;
-            }
+        @media (max-width: 599px) {
+            #container { width: 90vw; }
+            .element { font-size: 0.78rem; padding: 2px; }
         }
     </style>
 </head>
 <body>
     <div id="container"></div>
     <div class="buttonCont">
-        <div class="fancy-button" onclick="ref()">
-            Odśwież
-        </div>
+        <div class="fancy-button" onclick="bingo()">Odśwież</div>
     </div>
 
     <script>
@@ -111,7 +91,6 @@
                 do {
                     los = Math.floor(Math.random() * hasla.length);
                 } while (losy.has(los));
-
                 losy.add(los);
 
                 let div = document.createElement("div");
@@ -123,10 +102,10 @@
 
                 if (i === 12) {
                     div.innerHTML = "<b>Free pole</b>";
-                    div.dataset.clicked = "true"; 
+                    div.dataset.clicked = "true";
                     div.style.backgroundColor = "lightgreen";
                 } else {
-                    div.innerHTML = `<p>${hasla[los]}</p>`;
+                    div.innerHTML = hasla[los];
                 }
 
                 container.appendChild(div);
@@ -138,21 +117,25 @@
             div.dataset.clicked = clicked ? "false" : "true";
             div.style.backgroundColor = clicked ? "white" : "lightgreen";
 
-            checkBingo();
+            setTimeout(checkBingo, 200);
         }
 
         function checkBingo() {
+            let clickedCount = document.querySelectorAll('[data-clicked="true"]').length;
+            if (clickedCount >= 13) {
+                alert("WYGRAŁEŚ! Ponad połowa pól jest zaznaczona!");
+                return;
+            }
+
             for (let i = 0; i < 5; i++) {
                 let rowClicked = [...document.querySelectorAll(`[data-row="${i}"]`)].every(cell => cell.dataset.clicked === "true");
                 let colClicked = [...document.querySelectorAll(`[data-col="${i}"]`)].every(cell => cell.dataset.clicked === "true");
-
                 if (rowClicked || colClicked) {
                     alert("BINGO!");
                     return;
                 }
             }
 
-            // Sprawdzanie przekątnych
             let diagonal1 = [...document.querySelectorAll(".element")]
                 .filter(cell => cell.dataset.row === cell.dataset.col)
                 .every(cell => cell.dataset.clicked === "true");
@@ -163,12 +146,7 @@
 
             if (diagonal1 || diagonal2) {
                 alert("BINGO!");
-                return;
             }
-        }
-
-        function ref() {
-            bingo();
         }
     </script>
 </body>
