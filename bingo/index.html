@@ -16,6 +16,10 @@
             display: flex;
             flex-wrap: wrap;
         }
+        .selected
+        {
+            background-color: lightgreen;
+        }
         .element {
             width: 20%;
             height: 20%;
@@ -74,82 +78,168 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', bingo);
+        let state = {
+    selectedCells: [],
+    boardWords: []
+};
 
-        function bingo() {
-            let hasla = [
-                'Mody do Minecrafta Mikołaja', 'Zagłodzona rybka Amelii', 'Firma Jacka', 'Naziści', 'Komuniści',
-                'PiS', 'KO/PO', 'Rząd', 'UE/Ekologia (Zielony ład)', 'Ceny czegokolwiek', 'Putin', 'Trump', 'Kaczyński', 'Trzaskowski', 'Tusk',
-                'Nowacka', 'Femboye', 'Palenie Fajek', 'Zioło', 'Lewica', 'Woke', 'Dziewczyna Saszy', 'Samobójstwo', 'Suck the bastard out (aborcja)',
-                'Brutalna metoda morderstwa', 'Narkotyki', 'Gry', 'Górnicza', 'II lub III Liceum'
-            ];
+// Funkcja zapisująca stan gry do localStorage
+function saveGameState() {
+    localStorage.setItem('bingoState', JSON.stringify(state));
+}
 
-            let losy = new Set();
-            let container = document.querySelector("#container");
-            container.innerHTML = "";
+// Funkcja ładująca stan gry z localStorage
+function loadGameState() {
+    const savedState = localStorage.getItem('bingoState');
+    return savedState ? JSON.parse(savedState) : null;
+}
 
-            for (let i = 0; i < 25; i++) {
-                let los;
-                do {
-                    los = Math.floor(Math.random() * hasla.length);
-                } while (losy.has(los));
-                losy.add(los);
+// Funkcja tworząca nową planszę
+function bingo() {
+    let hasla = [
+        'Mody do Minecrafta Mikołaja', 'Zagłodzona rybka Amelii', 'Seks', 'Naziści', 'Komuniści',
+        'PiS', 'KO/PO', 'Rząd', 'UE/Ekologia (Zielony ład)', 'Ceny czegokolwiek', 'Putin', 'Trump',
+        'Kaczyński', 'Trzaskowski', 'Tusk', 'Nowacka', 'Femboye', 'Palenie Fajek', 'Zioło', 'Lewica',
+        'Woke', 'Dziewczyna Saszy', 'Samobójstwo', 'Suck the bastard out (aborcja)',
+        'Brutalna metoda morderstwa', 'Narkotyki', 'Gry', 'Górnicza', 'II lub III Liceum',
+        'Programowanie', 'Podzespoły komputerowe'
+    ];
 
-                let div = document.createElement("div");
-                div.classList.add("element");
-                div.dataset.row = Math.floor(i / 5);
-                div.dataset.col = i % 5;
+    let losy = new Set();
+    let container = document.querySelector("#container");
+    container.innerHTML = "";
+
+    state.selectedCells = [];
+    state.boardWords = [];
+
+    for (let i = 0; i < 25; i++) {
+        let los;
+        do {
+            los = Math.floor(Math.random() * hasla.length);
+        } while (losy.has(los));
+        losy.add(los);
+
+        let div = document.createElement("div");
+        div.classList.add("element");
+        div.dataset.row = Math.floor(i / 5);
+        div.dataset.col = i % 5;
+        div.dataset.index = i; // dodajemy indeks do późniejszego zaznaczania
+        div.dataset.clicked = "false";
+        div.onclick = () => zaznacz(div);
+
+        if (i === 12) {
+            div.innerHTML = "<b>Free pole</b>";
+            div.dataset.clicked = "true";
+            div.style.backgroundColor = "lightgreen";
+            state.selectedCells.push(i);
+        } else {
+            div.innerHTML = hasla[los];
+        }
+
+        state.boardWords.push(div.innerHTML);
+        container.appendChild(div);
+    }
+
+    saveGameState(); // Zapisujemy nową planszę
+}
+
+// Funkcja zaznaczania pól
+function zaznacz(div) {
+    const index = parseInt(div.dataset.index);
+    let clicked = div.dataset.clicked === "true";
+
+    if (clicked) {
+        div.dataset.clicked = "false";
+        div.style.backgroundColor = "white";
+        state.selectedCells = state.selectedCells.filter(i => i !== index);
+    } else {
+        div.dataset.clicked = "true";
+        div.style.backgroundColor = "lightgreen";
+        state.selectedCells.push(index);
+    }
+
+    saveGameState();
+    setTimeout(checkBingo, 200);
+}
+
+// Sprawdzanie bingo
+function checkBingo() {
+    let clickedCount = document.querySelectorAll('[data-clicked="true"]').length;
+    if (clickedCount >= 13) {
+        alert("Bingo - ponad połowa pól jest zaznaczoma");
+        return;
+    }
+
+    for (let i = 0; i < 5; i++) {
+        let rowClicked = [...document.querySelectorAll(`[data-row="${i}"]`)].every(cell => cell.dataset.clicked === "true");
+        let colClicked = [...document.querySelectorAll(`[data-col="${i}"]`)].every(cell => cell.dataset.clicked === "true");
+        if (rowClicked || colClicked) {
+            alert("BINGO!");
+            return;
+        }
+    }
+
+    let diagonal1 = [...document.querySelectorAll(".element")]
+        .filter(cell => cell.dataset.row === cell.dataset.col)
+        .every(cell => cell.dataset.clicked === "true");
+
+    let diagonal2 = [...document.querySelectorAll(".element")]
+        .filter(cell => parseInt(cell.dataset.row) + parseInt(cell.dataset.col) === 4)
+        .every(cell => cell.dataset.clicked === "true");
+
+    if (diagonal1 || diagonal2) {
+        alert("BINGO!");
+    }
+}
+
+// Ładowanie gry na starcie
+function restoreGameState() {
+    const savedState = loadGameState();
+    const container = document.querySelector("#container");
+
+    if (savedState) {
+        state = savedState;
+        container.innerHTML = "";
+
+        state.boardWords.forEach((word, i) => {
+            let div = document.createElement("div");
+            div.classList.add("element");
+            div.dataset.row = Math.floor(i / 5);
+            div.dataset.col = i % 5;
+            div.dataset.index = i;
+
+            div.innerHTML = word;
+
+            if (state.selectedCells.includes(i)) {
+                div.dataset.clicked = "true";
+                div.style.backgroundColor = "lightgreen";
+            } else {
                 div.dataset.clicked = "false";
-                div.onclick = () => zaznacz(div);
-
-                if (i === 12) {
-                    div.innerHTML = "<b>Free pole</b>";
-                    div.dataset.clicked = "true";
-                    div.style.backgroundColor = "lightgreen";
-                } else {
-                    div.innerHTML = hasla[los];
-                }
-
-                container.appendChild(div);
-            }
-        }
-
-        function zaznacz(div) {
-            let clicked = div.dataset.clicked === "true";
-            div.dataset.clicked = clicked ? "false" : "true";
-            div.style.backgroundColor = clicked ? "white" : "lightgreen";
-
-            setTimeout(checkBingo, 200);
-        }
-
-        function checkBingo() {
-            let clickedCount = document.querySelectorAll('[data-clicked="true"]').length;
-            if (clickedCount >= 13) {
-                alert("WYGRAŁEŚ! Ponad połowa pól jest zaznaczona!");
-                return;
+                div.style.backgroundColor = "white";
             }
 
-            for (let i = 0; i < 5; i++) {
-                let rowClicked = [...document.querySelectorAll(`[data-row="${i}"]`)].every(cell => cell.dataset.clicked === "true");
-                let colClicked = [...document.querySelectorAll(`[data-col="${i}"]`)].every(cell => cell.dataset.clicked === "true");
-                if (rowClicked || colClicked) {
-                    alert("BINGO!");
-                    return;
-                }
-            }
+            div.onclick = () => zaznacz(div);
+            container.appendChild(div);
+        });
+    } else {
+        bingo(); // Jak nie ma zapisanej gry, to losujemy nową planszę
+    }
+}
 
-            let diagonal1 = [...document.querySelectorAll(".element")]
-                .filter(cell => cell.dataset.row === cell.dataset.col)
-                .every(cell => cell.dataset.clicked === "true");
+// Odświeżanie
+document.querySelector(".fancy-button").addEventListener('click', () => {
+    localStorage.removeItem('bingoState');
+    location.reload();
+});
 
-            let diagonal2 = [...document.querySelectorAll(".element")]
-                .filter(cell => parseInt(cell.dataset.row) + parseInt(cell.dataset.col) === 4)
-                .every(cell => cell.dataset.clicked === "true");
+// Ładowanie gry po wczytaniu
+document.addEventListener('DOMContentLoaded', () => {
+    restoreGameState();
+});
 
-            if (diagonal1 || diagonal2) {
-                alert("BINGO!");
-            }
-        }
+setInterval(() => {
+    saveGameState()}, 5000); 
+
     </script>
 </body>
 </html>
